@@ -1,0 +1,88 @@
+<div class="container-fluid" style="margin-top: 10pt;">
+  <div class="card w-75" style="border-color: #FF5A00;">
+    <div class="card-header text-white" style="background-color: #FF5A00;">
+      Cadastro de Aeronaves
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Aeronave</h5>
+      <div class="row">
+        <div class="col-sm-6">
+          <form [formGroup]="formularioAeronave" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="modelo">Modelo</label>
+              <input type="text" class="form-control" id="modelo" formControlName="modelo" [ngClass]="{ 'is-invalid': formularioEnviado && f.modelo.errors }">
+              <div *ngIf="formularioEnviado && f.modelo.errors" class="invalid-feedback">
+                <div *ngIf="f.modelo.errors.required">Informe um nome para o modelo!</div>
+                <div *ngIf="f.modelo.errors.minlength">Informe um nome para o modelo maior que dois caractertes!</div>
+                <div *ngIf="f.modelo.errors.maxlength">Informe um nome para o modelo igual ou menor que vinte caractertes!</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="quantidadeAssento">Quantidade de Assento</label>
+              <input type="number" class="form-control col-md-3" id="quantidadeAssento" formControlName="quantidadeAssento" [ngClass]="{ 'is-invalid': formularioEnviado && f.quantidadeAssento.errors }">
+              <div *ngIf="formularioEnviado && f.quantidadeAssento.errors" class="invalid-feedback">
+                <div *ngIf="f.quantidadeAssento.errors.required">Informe uma quantidade de assento!</div>
+                <div *ngIf="f.quantidadeAssento.errors.min">Informe uma quantidade de assento maior que um assento!</div>
+                <div *ngIf="f.quantidadeAssento.errors.max">Informe uma quantidade igual ou menor que trezentos assento!</div>
+              </div>
+            </div>            
+            <input type="hidden" formControlName="id">
+            <input type="hidden" formControlName="dataCriacao">
+            <button class="btn btn-secondary" type="reset" (click)="LimpaFormulario()">Limpar</button>&nbsp;
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </div>      
+    </div>
+  </div>
+
+  <div *ngIf="listaAeronaves?.length > 0" class="card w-75" style="border-color: #FF5A00; margin-top: 10pt;">
+    <div class="card-header text-white" style="background-color: #FF5A00;">
+      Aeronaves
+    </div>
+    <div class="card-body table-responsive-md">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col" class="w-50">Modelo</th>
+          <th scope="col" class="w-10">Assentos</th>
+          <th scope="col" class="w-20">Data Criação</th>
+          <th scope="col" class="w-5">&nbsp;</th>
+          <th scope="col" class="w-5">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let aeronave of listaAeronaves">
+          <td>{{ aeronave.modelo }}</td>
+          <td>{{ aeronave.quantidadeAssento | number}}</td>
+          <td>{{ aeronave.dataCriacao | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <button type="button" class="btn btn-light" (click)="carregaFormulario(aeronave.id)" style="background-color: transparent; border-color: transparent;">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-light" (click)="open(aeronave.id, aeronave.modelo)" style="background-color: transparent; border-color: transparent;">
+              <fa-icon [icon]="faTrashAlt"></fa-icon>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+        </ngb-pagination>
+    </div>
+  </div>  
+</div>
+
+<ngx-spinner
+  bdOpacity = 0.9
+  bdColor = "#333"
+  size = "default"
+  color = "#fff"
+  type = "ball-clip-rotate"
+  [fullScreen] = "false">
+    <p style="color: white" > Carregando... </p>
+</ngx-spinner>

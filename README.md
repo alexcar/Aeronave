@@ -33,7 +33,7 @@ Preparar o Backend e o Frontend para testar a solução manutenção de Aeronave
 ```npm i```
 5.execute a aplicação digitando no terminal o comando 
 ```ng serve```
-6. Abra o navegador no endereço: 
+6. Abra o navegador no endereço:<br> 
 `http://localhost:4200`
 7. Em seguida realize a manutenção das aeronaves.
 

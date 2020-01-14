@@ -28,10 +28,10 @@ Preparar o Backend e o Frontend para testar a solução manutenção de Aeronave
 2. Abra a pasta da aplicação no caminho:<br> 
 `code\Aeronave\Frontend`
 3. Clique com o botão direito na pasta AeronaveWeb e selecione Open with Code.
-4. Abra um novo terminal no VSCode.
+4. Abra um novo terminal no Visual Studio Code.
 5. Atualize os pacotes digitando no terminal o comando:<br> 
 `npm i`
-6. Execute a aplicação digitando no terminal o comando<br> 
+6. Execute a aplicação digitando no terminal o comando:<br> 
 `ng serve`
 6. Abra o navegador no endereço:<br> 
 `http://localhost:4200`
